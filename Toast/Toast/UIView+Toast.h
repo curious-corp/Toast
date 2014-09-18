@@ -29,6 +29,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
 
+@protocol ToastDelegate
+- (void)didTapDismissToast:(UIView*)toast;
+@end
+
 @interface UIView (Toast)
 
 // each makeToast method creates a view and displays it as toast

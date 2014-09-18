@@ -51,6 +51,7 @@ static const BOOL CSToastHidesOnTap             = YES;     // excludes activity 
 // associative reference keys
 static const NSString * CSToastTimerKey         = @"CSToastTimerKey";
 static const NSString * CSToastActivityViewKey  = @"CSToastActivityViewKey";
+static const NSString * CSToastDelegateKey      = @"CSToastDelegateKey";
 
 @interface UIView (ToastPrivate)
 
@@ -100,6 +101,10 @@ static const NSString * CSToastActivityViewKey  = @"CSToastActivityViewKey";
     [self showToast:toast duration:CSToastDefaultDuration position:CSToastDefaultPosition];
 }
 
+- (void)setDelegate:(id<ToastDelegate>)delegate {
+  objc_setAssociatedObject(self, &CSToastDelegateKey, delegate, OBJC_ASSOCIATION_ASSIGN);
+}
+
 - (void)showToast:(UIView *)toast duration:(NSTimeInterval)duration position:(id)point {
     toast.center = [self centerPointForPosition:point withToast:toast];
     toast.alpha = 0.0;
@@ -146,7 +151,8 @@ static const NSString * CSToastActivityViewKey  = @"CSToastActivityViewKey";
 - (void)handleToastTapped:(UITapGestureRecognizer *)recognizer {
     NSTimer *timer = (NSTimer *)objc_getAssociatedObject(self, &CSToastTimerKey);
     [timer invalidate];
-    
+    id<ToastDelegate> delegate = objc_getAssociatedObject(self, &CSToastTimerKey);
+    if (delegate) [delegate didTapDismissToast:self];
     [self hideToast:recognizer.view];
 }
 
