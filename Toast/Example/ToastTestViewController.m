@@ -27,7 +27,10 @@
             
         case 0: {
             // Make toast
-            [self.view makeToast:@"This is a piece of toast."];
+            UIView* toast = [self.view makeToast:@"This is a piece of toast."];
+            [toast setTapDismisBlock:^(UIView *toast) {
+              NSLog(@"Dismissed!");
+            }];
             break;
         }
             
