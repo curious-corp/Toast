@@ -50,5 +50,5 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // the showToast methods display any view as toast
 - (void)showToast:(UIView *)toast;
 - (void)showToast:(UIView *)toast duration:(NSTimeInterval)interval position:(id)point;
-- (void)setTapDismisBlock:(void(^)(UIView* toast))block;
+- (void)setTapDismissBlock:(void(^)(UIView* toast))block;
 @end

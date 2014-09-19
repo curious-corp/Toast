@@ -101,7 +101,7 @@ static const NSString * CSToastBlockKey         = @"CSToastBlockKey";
     [self showToast:toast duration:CSToastDefaultDuration position:CSToastDefaultPosition];
 }
 
-- (void)setTapDismisBlock:(void(^)(UIView* toast))block {
+- (void)setTapDismissBlock:(void(^)(UIView* toast))block {
   objc_setAssociatedObject(self, &CSToastBlockKey, block, OBJC_ASSOCIATION_ASSIGN);
 }
 
